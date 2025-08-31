@@ -56,22 +56,24 @@ train.py, eval.py, serve.py
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
+```
 ### Train affect model
 ```bash
 python scripts/train.py --config configs/default.yaml
 Evaluate checkpoint
 python scripts/eval.py --config configs/default.yaml --ckpt checkpoints/model_epoch1.pt
-
-Run API
+```
+### Run API
+```bash
 python scripts/serve.py --config configs/default.yaml
-
+```
 
 → Open http://localhost:8000/docs
-```bash
-Run Streamlit demo
-streamlit run ui/streamlit_app.py
 
+### Run Streamlit demo
+```bash
+streamlit run ui/streamlit_app.py
+```
 
 → Open http://localhost:8501
 
@@ -81,23 +83,24 @@ Build and run API:
 ```bash
 docker build -t eagt:latest .
 docker run -p 8000:8000 eagt:latest
-
+```
 
 Compose (API + UI):
 ```bash
 docker compose up --build
-
+```
 
 🔧 Usage
 
 DAiSEE
 ```bash
 python scripts/prepare_data.py --dataset daisee --root /datasets/DAiSEE --out configs/daisee_split.csv
-
+```
 
 SEMAINE
 ```bash
 python scripts/prepare_data.py --dataset semaine --root /datasets/SEMAINE --out configs/semaine_split.csv
+```
 
 How to use
 
@@ -109,7 +112,7 @@ python scripts/prepare_data.py \
   --out configs/daisee_split.csv \
   --audio-out /datasets/DAiSEE/audio16k \
   --extract-audio
-
+```
 
 SEMAINE — build CSV (keep original audio)
 ```bash
@@ -117,7 +120,7 @@ python scripts/prepare_data.py \
   --dataset semaine \
   --root /datasets/SEMAINE \
   --out configs/semaine_split.csv
-
+```
 
 SEMAINE — re-extract uniform audio (optional)
 
@@ -128,6 +131,7 @@ python scripts/prepare_data.py \
   --out configs/semaine_split_uniform.csv \
   --audio-out /datasets/SEMAINE/audio16k_uniform \
   --extract-audio
+```
 
 📊 Evaluation
 
