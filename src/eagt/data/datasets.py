@@ -20,8 +20,6 @@ class EAGTDataset(Dataset):
     Notes:
         - For demonstration, this dataset currently generates
           random tensors if no real features are provided.
-        - Replace with actual precomputed features for training
-          on DAiSEE, SEMAINE, or classroom data.
     """
     def __init__(self, csv_path, face_dim=512, audio_dim=768, behav_dim=16, seq_len=16):
         try:

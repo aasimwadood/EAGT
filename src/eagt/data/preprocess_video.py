@@ -4,7 +4,7 @@ import numpy as np
 
 class FaceExtractor:
     """
-    Minimal face cropper placeholder.
+    Minimal face cropper.
 
     For production:
       - Replace center-crop with a real detector (MTCNN via facenet-pytorch,

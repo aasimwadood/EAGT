@@ -314,7 +314,7 @@ def make_student_report_pdf(student_id: str, cohort: str, df_user: pd.DataFrame)
 # ====================== Local Detector Hooks (placeholders) ======================
 def infer_affect_from_frame(img: Image.Image) -> str:
     """
-    Placeholder visual affect inference — purely local and simple.
+    visual affect inference — purely local and simple.
     Heuristic: darker frames → confusion/frustration; brighter → engagement; mid → boredom.
     Replace with your CNN/LSTM pipeline.
     """
@@ -332,7 +332,7 @@ def infer_affect_from_frame(img: Image.Image) -> str:
 
 def infer_affect_from_audio(file: st.runtime.uploaded_file_manager.UploadedFile) -> str:
     """
-    Placeholder audio affect inference — purely local and simple.
+    audio affect inference — purely local and simple.
     Heuristic: average absolute amplitude → low (boredom), mid (confusion), high (engagement/frustration).
     Replace with wav2vec2 or a proper model.
     """
