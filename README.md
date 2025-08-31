@@ -30,22 +30,23 @@ It detects learner states such as *frustration, confusion, boredom, and engageme
 ---
 
 ## 🗂️ Project Layout
-src/eagt/
-data/ # dataset loaders & preprocessing (video/audio)
-models/ # vision, audio, and fusion models
-training/ # training loop, evaluation
-eval/ # metrics utilities
-strategy/ # affect → pedagogy mapping
-genai/ # generative engine (LLM + RAG)
-server/ # FastAPI server
-ui/
-streamlit_app.py # browser demo
-configs/
-default.yaml # experiment config
-rag_corpus/
-note_*.txt # retrieval documents
-scripts/
-train.py, eval.py, serve.py
+
+- src/eagt/
+  - data/ # dataset loaders & preprocessing (video/audio)
+  - models/ # vision, audio, and fusion models
+  - training/ # training loop, evaluation
+  - eval/ # metrics utilities
+  - strategy/ # affect → pedagogy mapping
+  - genai/ # generative engine (LLM + RAG)
+  - server/ # FastAPI server
+  - ui/
+    - streamlit_app.py # browser demo
+  - configs/
+    - default.yaml # experiment config
+  - rag_corpus/
+    - note_*.txt # retrieval documents
+- scripts/
+   - train.py, eval.py, serve.py
 
 
 ---
@@ -77,7 +78,7 @@ streamlit run ui/streamlit_app.py
 
 → Open http://localhost:8501
 
-🐳 Docker
+### 🐳 Docker
 
 Build and run API:
 ```bash
@@ -85,26 +86,26 @@ docker build -t eagt:latest .
 docker run -p 8000:8000 eagt:latest
 ```
 
-Compose (API + UI):
+### Compose (API + UI):
 ```bash
 docker compose up --build
 ```
 
-🔧 Usage
+## 🔧 Usage
 
-DAiSEE
+### DAiSEE
 ```bash
 python scripts/prepare_data.py --dataset daisee --root /datasets/DAiSEE --out configs/daisee_split.csv
 ```
 
-SEMAINE
+### SEMAINE
 ```bash
 python scripts/prepare_data.py --dataset semaine --root /datasets/SEMAINE --out configs/semaine_split.csv
 ```
 
-How to use
+### How to use
 
-DAiSEE — build CSV + extract WAV audio
+#### DAiSEE — build CSV + extract WAV audio
 ```bash
 python scripts/prepare_data.py \
   --dataset daisee \
@@ -114,7 +115,7 @@ python scripts/prepare_data.py \
   --extract-audio
 ```
 
-SEMAINE — build CSV (keep original audio)
+#### SEMAINE — build CSV (keep original audio)
 ```bash
 python scripts/prepare_data.py \
   --dataset semaine \
@@ -122,7 +123,7 @@ python scripts/prepare_data.py \
   --out configs/semaine_split.csv
 ```
 
-SEMAINE — re-extract uniform audio (optional)
+### SEMAINE — re-extract uniform audio (optional)
 
 ```bash
 python scripts/prepare_data.py \
@@ -133,7 +134,7 @@ python scripts/prepare_data.py \
   --extract-audio
 ```
 
-📊 Evaluation
+## 📊 Evaluation
 
 Affect recognition: accuracy, F1, confusion matrix
 
@@ -145,7 +146,7 @@ Satisfaction: Likert ratings
 
 See src/eagt/eval/metrics.py for metrics.
 
-📖 References
+## 📖 References
 
 Representative literature:
 
@@ -164,11 +165,11 @@ Deng et al. (2024). ChatGPT in education.
 Kasneci et al. (2023). Opportunities and risks of LLMs.
 
 
-📜 License
+## 📜 License
 
 Apache 2.0 — free for academic and non-commercial use. Contact authors for commercial licensing.
 
-🙋 Contributing
+## 🙋 Contributing
 
 PRs welcome! Add new modalities, integrate larger LLMs, or extend evaluation protocols.
 
