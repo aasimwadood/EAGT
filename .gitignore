@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Checkpoints and logs
+checkpoints/
+logs/
+runs/
+*.ckpt
+
+# Data
+*.csv
+*.tsv
+*.json
+*.mp4
+*.wav
+rag_corpus/*.tmp
+
+# IDE
+.vscode/
+.idea/

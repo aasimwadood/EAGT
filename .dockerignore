@@ -1,0 +1,35 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual envs
+.venv/
+env/
+venv/
+
+# Data and large artifacts (mount these as volumes instead)
+data/
+datasets/
+rag_corpus/*.tmp
+*.csv
+*.tsv
+*.mp4
+*.wav
+*.zip
+
+# Training outputs
+checkpoints/
+runs/
+logs/
+*.ckpt
+
+# VCS/IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db

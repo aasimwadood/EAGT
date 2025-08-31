@@ -1,0 +1,3 @@
+The chain rule in calculus allows us to differentiate composite functions.
+If y = f(g(x)), then dy/dx = f'(g(x)) * g'(x).
+A common mnemonic is "differentiate the outside, then multiply by the inside".

@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  api:
+    build: .
+    container_name: eagt-api
+    command: ["python", "scripts/serve.py", "--config", "configs/default.yaml"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./rag_corpus:/app/rag_corpus:ro
+      - ./checkpoints:/app/checkpoints
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  ui:
+    build: .
+    container_name: eagt-ui
+    command: ["streamlit", "run", "ui/streamlit_app.py", "--server.port=8501", "--server.headless=true"]
+    ports:
+      - "8501:8501"
+    depends_on:
+      api:
+        condition: service_healthy
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./rag_corpus:/app/rag_corpus:ro

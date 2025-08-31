@@ -1,0 +1,50 @@
+# ============================
+# EAGT Config (DAiSEE dataset)
+# ============================
+
+seed: 1337
+device: cuda
+
+data:
+  dataset: daisee
+  root: /datasets/DAiSEE
+  split_csv: /datasets/DAiSEE/splits/train.csv   # typical split file
+  face_fps: 8
+  audio_sr: 16000
+  window_sec: 1.0
+  stride_sec: 0.5
+  classes: [frustration, confusion, boredom, engagement]
+
+preprocess:
+  face_detector: mtcnn
+  face_size: 112
+  augment: true
+
+model:
+  vision_backbone: resnet18
+  audio_backbone: wav2vec2
+  hidden_dim: 256
+  lstm_layers: 2
+  dropout: 0.3
+
+train:
+  batch_size: 8
+  epochs: 10
+  lr: 3e-4
+  weight_decay: 1e-4
+  warmup_steps: 100
+  grad_clip: 1.0
+  ckpt_dir: checkpoints
+  log_interval: 10
+
+genai:
+  model_name: gpt2    # swap with llama-2, mistral, etc.
+  max_new_tokens: 180
+  temperature: 0.8
+  top_p: 0.92
+  rag_corpus_dir: ./rag_corpus
+  use_rag: true
+
+server:
+  host: 0.0.0.0
+  port: 8000
