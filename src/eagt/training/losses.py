@@ -1,6 +1,5 @@
 """
 Focal Loss and class weight utilities for handling class imbalance.
-Paper Reference: Section III.D.6
 
 This module implements:
 - FocalLoss: FL(p_t) = -α_t * (1 - p_t)^γ * log(p_t)
@@ -17,7 +16,6 @@ class FocalLoss(nn.Module):
     """
     Focal Loss for handling class imbalance in affect recognition.
 
-    Paper Reference: Section III.D.6
 
     Focal Loss down-weights well-classified examples and focuses on hard,
     misclassified examples. This is particularly useful for affect datasets
@@ -140,7 +138,6 @@ def compute_class_weights(
     """
     Compute class weights for handling imbalanced datasets.
 
-    Paper Reference: Section III.D.6
 
     Parameters
     ----------
@@ -172,7 +169,7 @@ def compute_class_weights(
         weights = 1.0 / counts
 
     elif method == "effective_num":
-        # Effective number of samples (from "Class-Balanced Loss" paper)
+        # Effective number of samples (from "Class-Balanced Loss")
         effective_num = 1.0 - torch.pow(beta, counts)
         weights = (1.0 - beta) / effective_num
 
@@ -230,7 +227,7 @@ class MultiTaskLoss(nn.Module):
     """
     Multi-task loss combining classification with auxiliary objectives.
 
-    Paper Reference: Section III.D.7 mentions multitask learning with
+    multitask learning with
     arousal/valence prediction alongside categorical states.
 
     Parameters

@@ -1,7 +1,6 @@
 """
 Generative Explanation Engine with Style Regularization.
 
-Paper Reference: Section III.F, Algorithm 1, Equation (12)
 
 This module implements:
 - RAG-based retrieval using BM25
@@ -61,7 +60,6 @@ class EmpathyScorer(nn.Module):
     """
     Empathy scoring model for candidate re-ranking.
 
-    Paper Reference: Algorithm 1
 
     This scorer evaluates how empathetic and supportive a generated
     response is, used for re-ranking candidate responses.
@@ -179,7 +177,7 @@ class GenerativeEngine:
     A simple LLM wrapper with optional BM25 retrieval-augmentation.
 
     For backward compatibility. Use GenerativeEngineWithReranking for
-    full paper implementation with candidate re-ranking.
+    with candidate re-ranking.
     """
 
     def __init__(
@@ -257,7 +255,6 @@ class GenerativeEngineWithReranking:
     """
     Generative engine with candidate re-ranking and style regularization.
 
-    Paper Reference: Section III.F, Algorithm 1, Equation (12)
 
     This implements the full generation pipeline:
     1. Retrieve relevant context using BM25
@@ -266,7 +263,7 @@ class GenerativeEngineWithReranking:
     4. Re-rank using: score = log P(y|x) + λ * E(y)
     5. Return best candidate
 
-    Algorithm 1 from paper:
+    Algorithm 1:
     ```
     Input: question x, style s, pedagogy p, num_candidates N, lambda λ
     Output: best response y*
@@ -398,7 +395,6 @@ class GenerativeEngineWithReranking:
         """
         Compute log-likelihood of response given prompt.
 
-        Paper Reference: Algorithm 1, line 6
         """
         try:
             full_text = prompt + " " + response
@@ -455,7 +451,7 @@ class GenerativeEngineWithReranking:
         """
         Generate response with candidate re-ranking.
 
-        Paper Reference: Algorithm 1
+        Algorithm 1
 
         Parameters
         ----------
@@ -547,7 +543,6 @@ class StyleRegularizationLoss(nn.Module):
     """
     Style regularization loss for training.
 
-    Paper Reference: Equation (12)
 
     This loss encourages generated responses to be empathetic
     and consistent with the target style.

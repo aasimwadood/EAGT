@@ -1,7 +1,6 @@
 """
 Training script for EAGT Affect Recognition.
 
-Paper Reference: Section III.D
 
 This module implements:
 - Training loop with focal loss for class imbalance (Section III.D.6)
@@ -45,8 +44,7 @@ class TrainingMetrics:
 class EarlyStopping:
     """
     Early stopping to prevent overfitting.
-
-    Paper Reference: Section III.D mentions early stopping for training.
+    early stopping for training.
     """
 
     def __init__(
@@ -101,8 +99,7 @@ class EarlyStopping:
 def _make_dataloaders(cfg) -> Dict[str, DataLoader]:
     """
     Builds train/val dataloaders.
-
-    Paper Reference: Section III.D mentions leave-one-subject-out evaluation.
+    leave-one-subject-out evaluation.
     For proper evaluation, use separate train/val CSV files.
     """
     # Get CSV paths
@@ -145,8 +142,7 @@ def create_optimizer_and_scheduler(
 ) -> Tuple[torch.optim.Optimizer, torch.optim.lr_scheduler._LRScheduler]:
     """
     Create optimizer with warmup scheduler.
-
-    Paper Reference: Section III.D mentions LR warmup (100 steps).
+    LR warmup (100 steps).
     """
     optimizer = AdamW(
         model.parameters(),
@@ -154,7 +150,7 @@ def create_optimizer_and_scheduler(
         weight_decay=cfg.train.weight_decay,
     )
 
-    # Warmup scheduler (100 steps per paper)
+    # Warmup scheduler (100 steps)
     warmup_steps = getattr(cfg.train, 'warmup_steps', 100)
     warmup_scheduler = LinearLR(
         optimizer,
@@ -195,7 +191,6 @@ def train_epoch(
     """
     Train for one epoch.
 
-    Paper Reference: Section III.D
 
     Uses:
     - Focal loss for class imbalance (Section III.D.6)
@@ -358,7 +353,6 @@ def train_loop(cfg) -> None:
     """
     Main training loop.
 
-    Paper Reference: Section III.D
 
     Implements:
     - Focal loss for class imbalance (Section III.D.6)
@@ -579,8 +573,7 @@ def evaluate_checkpoint(cfg, ckpt_path: str, silent: bool = False) -> TrainingMe
 def leave_one_subject_out_cv(cfg) -> Dict[str, float]:
     """
     Leave-one-subject-out cross-validation.
-
-    Paper Reference: Section III.D mentions this evaluation strategy.
+    this evaluation strategy.
 
     This requires a CSV with a 'subject_id' column to identify subjects.
     """

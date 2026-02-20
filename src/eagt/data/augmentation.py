@@ -1,7 +1,6 @@
 """
 Data Augmentation for Multimodal Affect Recognition.
 
-Paper Reference: Section III.D.7
 
 This module implements augmentation strategies:
 - Gaussian noise injection to audio
@@ -59,8 +58,7 @@ class GaussianNoise(nn.Module):
 class TemporalMask(nn.Module):
     """
     Randomly mask temporal segments.
-
-    Paper Reference: Section III.D.7 mentions data augmentation
+    data augmentation
     to simulate real-world noise and occlusion.
     """
 
@@ -109,8 +107,7 @@ class TemporalMask(nn.Module):
 class ModalityDropout(nn.Module):
     """
     Randomly drop entire modalities during training.
-
-    Paper Reference: Section III.C.5.a mentions modality dropout
+    modality dropout
     for robustness to prolonged modality absence.
     """
 
@@ -223,7 +220,6 @@ class MultimodalAugmentation(nn.Module):
     """
     Combined augmentation pipeline for multimodal affect recognition.
 
-    Paper Reference: Section III.D.7
 
     This module applies various augmentations to face, audio, and behavioral
     features to improve model robustness and generalization.

@@ -1,7 +1,6 @@
 """
 Early-Late Hybrid Fusion for Multimodal Affect Recognition.
 
-Paper Reference: Section III.D.2, Equations (2-5)
 
 This module implements:
 - Early fusion: Concatenate modality embeddings
@@ -20,9 +19,9 @@ from typing import Dict, Optional, Tuple
 
 class FusionClassifier(nn.Module):
     """
-    Basic early fusion classifier (original implementation).
+    Basic early fusion classifier.
 
-    For backward compatibility. Use FusionClassifierHybrid for full paper implementation.
+    For backward compatibility. Use FusionClassifierHybrid.
     """
 
     def __init__(
@@ -71,7 +70,6 @@ class FusionClassifierHybrid(nn.Module):
     """
     Early-Late Hybrid Fusion Classifier.
 
-    Paper Reference: Section III.D.2, Equation (3)
 
     This implements the full fusion strategy from the paper:
     1. Early fusion: Concatenate modality embeddings at each timestep
@@ -167,7 +165,7 @@ class FusionClassifierHybrid(nn.Module):
 
         # ============ Learnable Fusion Weights (α, β1, β2, β3) ============
         # Initialized to give more weight to the fused prediction
-        # Paper Equation (3): ŷ_final = α·ŷ + β1·ŷ_face + β2·ŷ_speech + β3·ŷ_behav
+        #  ŷ_final = α·ŷ + β1·ŷ_face + β2·ŷ_speech + β3·ŷ_behav
         if learn_fusion_weights:
             self.fusion_weights = nn.Parameter(
                 torch.tensor([0.50, 0.20, 0.20, 0.10])  # [α, β1, β2, β3]
@@ -229,18 +227,18 @@ class FusionClassifierHybrid(nn.Module):
 
         # ============ Early Fusion Path ============
         # Concatenate modalities along feature dimension
-        # Paper Equation (2): f_t = [f_t^face || f_t^speech || f_t^behav]
+        #  f_t = [f_t^face || f_t^speech || f_t^behav]
         x = torch.cat([face, audio, behav], dim=-1)  # (B, T, Df+Da+Db)
 
         # BiLSTM for temporal modeling
-        # Paper Equation (4): h_t = BiLSTM(f_t, h_{t-1})
+        #  h_t = BiLSTM(f_t, h_{t-1})
         h, _ = self.temporal(x)  # (B, T, 2*hidden)
 
         # Mean pooling over time (robust to variable lengths)
         h_pool = h.mean(dim=1)  # (B, 2*hidden)
 
         # Main fused classifier
-        # Paper Equation (5): ŷ_t = softmax(W·h_t + b)
+        # ŷ_t = softmax(W·h_t + b)
         logits_fused = self.fused_head(h_pool)  # (B, C)
 
         # ============ Late Fusion Path: Auxiliary Classifiers ============
@@ -260,7 +258,7 @@ class FusionClassifierHybrid(nn.Module):
         logits_behav = self.behav_head(behav_enc)  # (B, C)
 
         # ============ Weighted Late Fusion ============
-        # Paper Equation (3): ŷ_final = α·ŷ + β1·ŷ_face + β2·ŷ_speech + β3·ŷ_behav
+        #  ŷ_final = α·ŷ + β1·ŷ_face + β2·ŷ_speech + β3·ŷ_behav
         if self.use_attention_fusion:
             # Dynamic attention-based fusion
             all_logits = torch.cat([

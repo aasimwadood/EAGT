@@ -1,7 +1,6 @@
 """
 Dataset classes for EAGT Multimodal Affect Recognition.
 
-Paper Reference: Section III.B, III.C
 
 This module implements:
 - EAGTDataset: Windowed multimodal dataset with real feature loading
@@ -55,7 +54,6 @@ class AudioFeatureExtractor:
     """
     Audio feature extraction using wav2vec2.
 
-    Paper Reference: Section III.B.3, III.C.2
     """
 
     def __init__(
@@ -174,7 +172,6 @@ class EAGTDataset(Dataset):
     """
     Windowed multimodal dataset for EAGT.
 
-    Paper Reference: Section III.B, III.C
 
     This dataset loads and processes:
     - Face embeddings from video (via ResNet18 or similar)

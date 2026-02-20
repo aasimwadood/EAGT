@@ -1,7 +1,6 @@
 """
 Behavioral Feature Extraction for EAGT.
 
-Paper Reference: Section III.B.4, III.C.3
 
 This module extracts behavioral features from learner interaction logs:
 - Response latency
@@ -26,8 +25,7 @@ from dataclasses import dataclass, field
 class BehaviorFeatureRanges:
     """
     Min-max ranges for behavioral feature normalization.
-
-    Paper Reference: Section III.C.3 mentions min-max normalization.
+    min-max normalization.
     These defaults are based on typical learning interaction patterns.
     """
     response_latency: Tuple[float, float] = (0.0, 60.0)      # 0-60 seconds
@@ -55,7 +53,6 @@ class BehaviorFeatures:
     """
     Container for extracted behavioral features.
 
-    Paper Reference: Section III.C.3
     """
     response_latency: float = 0.0
     hint_request_freq: float = 0.0
@@ -110,7 +107,6 @@ def extract_behavioral_features(
     """
     Extract behavioral features from interaction log events for a time window.
 
-    Paper Reference: Section III.B.4, III.C.3
 
     This function processes raw interaction events (clicks, keystrokes, scrolls,
     hint requests, etc.) and computes aggregate behavioral features that indicate
@@ -258,8 +254,7 @@ def extract_behavioral_features_sequence(
 ) -> np.ndarray:
     """
     Extract behavioral features for a sequence of time windows.
-
-    Paper Reference: Section III.C.4 - Temporal Synchronization
+    Temporal Synchronization
 
     Parameters
     ----------
@@ -350,8 +345,7 @@ def load_behavior_events(
 def compute_engagement_indicators(features: np.ndarray) -> Dict[str, float]:
     """
     Compute high-level engagement indicators from behavioral features.
-
-    Paper Reference: Section III.B.4 discusses how behavioral traces
+    how behavioral traces
     indicate engagement patterns.
 
     Parameters

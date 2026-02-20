@@ -1,7 +1,6 @@
 """
 Video Preprocessing with Face Detection, CLAHE, and FACS.
 
-Paper Reference: Section III.B.2, III.C.1
 
 This module implements:
 - Face detection using MediaPipe or OpenCV cascades
@@ -10,7 +9,7 @@ This module implements:
 - Facial Action Coding System (FACS) feature extraction
 - Facial landmark extraction
 
-Paper requires: MediaPipe/OpenFace face detection, alignment, CLAHE
+MediaPipe/OpenFace face detection, alignment, CLAHE
 illumination normalization, Facial Action Coding System features.
 """
 
@@ -43,7 +42,6 @@ class CLAHEProcessor:
     """
     CLAHE (Contrast Limited Adaptive Histogram Equalization) processor.
 
-    Paper Reference: Section III.C.1
 
     CLAHE improves face recognition under varying illumination conditions
     by enhancing local contrast while limiting noise amplification.
@@ -102,7 +100,6 @@ class FaceDetectorMediaPipe:
     """
     Face detection using MediaPipe Face Detection and Face Mesh.
 
-    Paper Reference: Section III.B.2
 
     MediaPipe provides robust face detection and 478 facial landmarks
     for detailed face analysis.
@@ -245,7 +242,6 @@ class FACSExtractor:
     """
     Facial Action Coding System (FACS) feature extraction.
 
-    Paper Reference: Section III.C.1
 
     FACS describes facial expressions in terms of Action Units (AUs),
     which represent individual muscle movements. Key AUs for affect:
@@ -425,7 +421,6 @@ class FaceExtractor:
     """
     Complete face extraction pipeline with detection, CLAHE, and FACS.
 
-    Paper Reference: Section III.B.2, III.C.1
 
     This class provides a production-ready face extraction pipeline:
     1. Face detection (MediaPipe or Haar cascade fallback)

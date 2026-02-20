@@ -1,7 +1,6 @@
 """
 Affect-to-Strategy Mapping with Confidence-based Fallback.
 
-Paper Reference: Section III.E.1, Equation (8)
 
 This module implements:
 - Mapping from affect labels to pedagogical strategies
@@ -17,13 +16,13 @@ import torch
 import torch.nn.functional as F
 
 
-# Paper Section III.E.1: Confidence threshold τ = 0.65
+# Confidence threshold τ = 0.65
 CONFIDENCE_THRESHOLD = 0.65
 
 # Affect labels (4-class classification)
 AFFECT_LABELS = ["frustration", "confusion", "boredom", "engagement"]
 
-# Paper mentions ambiguous pairs that can be confused
+# ambiguous pairs that can be confused
 AMBIGUOUS_PAIRS: Set[frozenset] = {
     frozenset({"boredom", "frustration"}),
     frozenset({"confusion", "frustration"}),
@@ -43,7 +42,6 @@ def get_neutral_strategy() -> Strategy:
     """
     Neutral/fallback strategy for low-confidence or ambiguous predictions.
 
-    Paper Reference: Section III.E.1
 
     This strategy is used when:
     1. Classifier confidence < CONFIDENCE_THRESHOLD (0.65)
@@ -127,8 +125,7 @@ def map_affect_to_strategy(label: str) -> Strategy:
 def is_ambiguous_pair(label1: str, label2: str) -> bool:
     """
     Check if two labels form an ambiguous pair.
-
-    Paper Reference: Section III.E.1 notes that certain affect pairs
+    certain affect pairs
     (e.g., boredom vs frustration) are frequently confused.
     """
     pair = frozenset({label1.lower(), label2.lower()})
@@ -143,7 +140,6 @@ def map_affect_to_strategy_with_confidence(
     """
     Map affect prediction to strategy with confidence-based fallback.
 
-    Paper Reference: Section III.E.1, Equation (8)
 
     This implements the confidence-based fallback mechanism:
     1. If max confidence < threshold, use neutral strategy
@@ -155,7 +151,7 @@ def map_affect_to_strategy_with_confidence(
     logits : torch.Tensor
         Raw logits from classifier of shape (C,) or (B, C) where C=4.
     confidence_threshold : float
-        Minimum confidence to trust prediction. Default 0.65 per paper.
+        Minimum confidence to trust prediction. Default 0.65.
     ambiguity_margin : float
         Minimum margin between top-2 predictions for non-ambiguous pairs.
 
@@ -265,7 +261,6 @@ class AdaptiveStrategySelector:
     """
     Adaptive strategy selection with temporal smoothing.
 
-    Paper Reference: Section III.E.1
 
     This class maintains history of predictions and applies temporal
     smoothing to avoid rapid strategy switches that could confuse learners.
