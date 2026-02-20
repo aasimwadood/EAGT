@@ -71,7 +71,7 @@ class FusionClassifierHybrid(nn.Module):
     Early-Late Hybrid Fusion Classifier.
 
 
-    This implements the full fusion strategy from the paper:
+    This implements the full fusion strategy:
     1. Early fusion: Concatenate modality embeddings at each timestep
     2. BiLSTM: Encode temporal dependencies
     3. Late fusion: Auxiliary per-modality classifiers
